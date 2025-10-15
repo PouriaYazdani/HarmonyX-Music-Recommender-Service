@@ -1,0 +1,10 @@
+CONTENT-BASED-NO-MODEL-RECOMMENDATIONS_FILE=data/content_based_no_model/recommendations.pkl
+METADATA_FILE=data/Music_Info_trimmed.csv
+COLLABORATIVE-FILTERING-ALS-MODEL=data/collaborative/als_model.pkl
+COLLABORATIVE-FILTERING-ITEM-ENCODER=data/collaborative/item_encoder.pkl
+COLLABORATIVE-FILTERING-USER-ENCODER=data/collaborative/user_encoder.pkl
+COLLABORATIVE-FILTERING-USER-ITEM-MATRIX=data/collaborative/user_item_matrix.pkl
+COLLABORATIVE-FILTERING-MUSIC-INFO-TRIMMED=data/collaborative/music_info_trimmed.parquet
+CONTENT-BASED-WITH-MODEL-EMBEDDINGS_FILE=data/content_based_with_model/tracks_embeddings_similars.pkl
+VGGISH_MODEL_PATH=data/content_based_with_model/vggish_model
+TRACKS_FILES_PATH=data/content_based_with_model/tracks
