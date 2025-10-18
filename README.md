@@ -38,8 +38,14 @@ See data preprocessing details in /preprocess/content_based_no_model
 
 #### 2) Content-Based (With Model)
 
+Looks up recommendations from a precomputed mapping: `spotify_id → [top 15 similar IDs]`.
+When a seed ID is not present, it extracts a 128-dimensional VGGish embedding from a short audio segment of the track, computes cosine similarities to an existing embedding bank, and returns the top 15 most similar IDs based on those similarities. Newly computed embeddings and similar IDs are persisted to an on-disk store for future use.
+Also includes a playlist builder returning composed uniform, duplicate-free set across multiple seeds, reserving quota per seed and fetching extra batches as needed. (wraps single recommendation methods)
 
+For this variant, the dataset was taken from:
+- [million-song-dataset-spotify-lastfm](https://www.kaggle.com/datasets/undefinednull/million-song-dataset-spotify-lastfm)
 
+See data preprocessing details in /preprocess/content_based_with_model
 
 #### 3) Collaborative Filtering 
 **Data & ID reconciliation.**  
