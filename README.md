@@ -37,7 +37,7 @@ For this variant, the dataset was taken from:
 See data preprocessing details in /preprocess/content_based_no_model
 
 #### 2) Content-Based (With Model)
-**Data & ID reconciliation.** 
+**Data & ID reconciliation.**  
 Audio previews are sourced from MP3 files (e.g., via Spotify API previews or provided dataset samples). **Track IDs** from the **Million Song Dataset (MSD)** are mapped to **Spotify track IDs** using metadata in a CSV file, creating a dictionary for quick lookup and ensuring Spotify IDs serve as the canonical item identifier.
 
 **Model & objective.**  
