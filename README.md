@@ -37,6 +37,29 @@ For this variant, the dataset was taken from:
 See data preprocessing details in /preprocess/content_based_no_model
 
 #### 2) Content-Based (With Model)
+**Data & ID reconciliation.** 
+Audio previews are sourced from MP3 files (e.g., via Spotify API previews or provided dataset samples). **Track IDs** from the **Million Song Dataset (MSD)** are mapped to **Spotify track IDs** using metadata in a CSV file, creating a dictionary for quick lookup and ensuring Spotify IDs serve as the canonical item identifier.
+
+**Model & objective.**  
+We use the **VGGish model** (loaded from `TensorFlow Hub`) to extract audio embeddings. Embeddings are 128-dimensional vectors derived from short audio segments, with cosine similarity computed to measure track similarity and identify content-based recommendations.
+
+**Training workflow (high level).**  
+1. Load audio MP3 files from the dataset folder and map track IDs to Spotify IDs using the metadata CSV.
+2. Preprocess each audio file (resample to 16kHz mono, pad/truncate to meet VGGish frame requirements).
+3. Extract embeddings by passing preprocessed audio through VGGish and applying mean pooling over frame-level outputs to obtain a single 128-dimensional vector per track.
+4. Compute pairwise cosine similarities across all embeddings using scikit-learn.
+5. For each track, select the top 15 most similar Spotify IDs (excluding the track itself).
+6. Persist the results (Spotify ID, embedding, and top similar IDs) to a .pkl file for fast lookup and state continuity.
+
+**Online updates & cold-start.** 
+- **New tracks:** If a seed Spotify ID is not in the .pkl file, load and preprocess the corresponding MP3 audio, extract its VGGish embedding, compute cosine similarities against the existing embedding bank, and return the top 15 similar IDs. The new embedding and similar IDs are appended to the .pkl file for persistence.  
+- **Recommendation:** `recommend(spotify_id, n)` returns top-n similar Spotify IDs from the precomputed list or computes them on-the-fly for unseen tracks; if no audio is available, it handles errors gracefully without recommendations.
+
+Specifics of **data preprocessing, audio loading/mapping, embedding extraction, similarity computation, hyperparameters (e.g., top-N=15)**, and the **training pipeline** are documented in the accompanying notebook:
+`/preprocess and train/content_based_with_model/content-based-filtering.ipynb`
+
+For this variant, the dataset was taken from:
+- [million-song-dataset-spotify-lastfm](https://www.kaggle.com/datasets/undefinednull/million-song-dataset-spotify-lastfm)
 
 #### 3) Collaborative Filtering 
 **Data & ID reconciliation.**  
