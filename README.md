@@ -38,9 +38,6 @@ See data preprocessing details in /preprocess/content_based_no_model
 
 #### 2) Content-Based (With Model)
 
-
-
-
 #### 3) Collaborative Filtering 
 **Data & ID reconciliation.**  
 User listening histories come from the **Million Song Dataset (MSD)**. We use MSD metadata to match tracks to their artists, and then reconcile those records to **Spotify track IDs** (the service’s canonical item identifier).
