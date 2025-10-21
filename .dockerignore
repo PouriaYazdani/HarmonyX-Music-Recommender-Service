@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Env & secrets
+.env
+.env.*
+
+# Build & caches
+build/
+dist/
+*.egg-info/
+.wheels/
+.wandb/
+.mlflow/
+
+# Git
+.git/
+.gitignore
+
+# OS/editor
+.DS_Store
+*.swp
+*.swo
+
+# Local artifacts (we fetch via Github release at runtime)
+data/
