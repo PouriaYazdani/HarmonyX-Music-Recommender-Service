@@ -110,6 +110,8 @@ Since this service was developed as part of a Software Engineering course, it in
 
 ### How to Run
 
-
-
+```
+docker build -t harmonyx:local .
+docker run --rm -it --env-file ".envs\.env.docker" -p 8000:8000 --name harmonyx harmonyx:local
+```
 
