@@ -33,6 +33,8 @@ COPY . /app
 
 # Entrypoint for model/data bootstrap + app start
 COPY docker/entrypoint.sh /entrypoint.sh
+# handle Windows (CRLF) line endings
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh 
 RUN chmod +x /entrypoint.sh && chown -R appuser:appuser /app
 
 ENV PYTHONUNBUFFERED=1 \
